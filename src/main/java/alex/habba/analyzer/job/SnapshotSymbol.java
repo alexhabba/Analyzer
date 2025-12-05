@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static alex.habba.analyzer.utils.CandleApi.getCandleDtoWithoutTicks;
@@ -28,11 +29,11 @@ public class SnapshotSymbol {
 
     private final SymbolInfoService service;
 
-        @Scheduled(cron = "01 00 * * * *")
-//    @Scheduled(fixedDelay = 1000000000)
+//        @Scheduled(cron = "01 00 * * * *")
+    @Scheduled(fixedDelay = 1000000000)
     public void execute() {
-        List<String> symbols = getLinearSymbols();
-//        List<String> symbols = List.of("SAPIENUSDT");
+//        List<String> symbols = getLinearSymbols();
+        List<String> symbols = List.of("SAPIENUSDT");
 
         List<SymbolInfo> symbolInfoList = new ArrayList<>();
 
@@ -45,7 +46,9 @@ public class SnapshotSymbol {
 //            }
 
             // todo
-            List<CandleDto> candles = getCandleDtoWithoutTicks(symb, LocalDateTime.now(ZoneOffset.UTC).minusHours(3), MarketInterval.HOURLY);
+            List<CandleDto> candles = getCandleDtoWithoutTicks(symb, LocalDateTime.now(ZoneOffset.UTC).minusHours(3), MarketInterval.HOURLY).stream()
+                    .sorted(Comparator.comparing(CandleDto::getCreateDate))
+                    .toList();
 
             BybitTickerResponse.TickerData tickerData = null;
             try {
