@@ -30,7 +30,7 @@ public class SnapshotSymbol {
     private final SymbolInfoService service;
 
 //        @Scheduled(cron = "01 00 * * * *")
-    @Scheduled(fixedDelay = 1000000000)
+    @Scheduled(fixedDelay = 10000)
     public void execute() {
 //        List<String> symbols = getLinearSymbols();
         List<String> symbols = List.of("SAPIENUSDT");
