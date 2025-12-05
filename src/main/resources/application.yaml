@@ -21,9 +21,10 @@ spring:
     #    url: jdbc:postgresql://${HOSTNAME:localhost}:${PORT:5433}/${DB_NAME:postgres}?currentSchema={spring.flyway.schemas}
     url: jdbc:postgresql://${HOSTNAME:45.8.251.166}:${PORT:5432}/${RDS_DB_NAME:postgres}?currentSchema=analyzer
     #    url: jdbc:postgresql://${RDS_HOSTNAME:host.docker.internal:${RDS_PORT:5432}/${RDS_DB_NAME:bot}?currentSchema=bot
-    #    docker run -d --name tickwld -e HOSTNAME=192.168.1.241 -e PORT=5432 tickwld
     #    docker run -d --name test -e HOSTNAME=host.docker.internal -e PORT=5432 tickwld
     #    docker run -d --name str10 -e strategy=10 -e HOSTNAME=host.docker.internal -e PORT=5433 --restart=always str13
+    #    docker run -d --name analyzer --restart=always analyzer
+    #    docker build -t analyzer .
     username: ${USERNAME:postgres}
     password: ${PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
