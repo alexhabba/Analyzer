@@ -6,6 +6,7 @@ import alex.habba.analyzer.entity.SymbolInfo;
 import alex.habba.analyzer.service.SymbolInfoService;
 import com.bybit.api.client.domain.market.MarketInterval;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import static alex.habba.analyzer.utils.FundingRateChecker.getTickerDataBySymbol
 import static alex.habba.analyzer.utils.SymbolUtils.getLinearSymbols;
 import static org.apache.commons.lang3.ObjectUtils.allNotNull;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SnapshotSymbol {
@@ -69,7 +71,7 @@ public class SnapshotSymbol {
                         .low(candle.getLow())
 //                        .circulatingSupply(tickerInfo.getCirculatingSupply())
 //                        .marketCapUsd(tickerInfo.getMarketCapUsd())
-                        .fundingRate(fundingRate)
+                        .fundingRate(fundingRate.multiply(BigDecimal.valueOf(100)))
                         .openInterest(openInterest)
                         .openInterestUsd(openInterestValue)
                         .build();
@@ -83,5 +85,6 @@ public class SnapshotSymbol {
 //            }
         });
         service.saveAll(symbolInfoList);
+        log.info("Информация о токенах успешно сохранена. {}", symbolInfoList.get(0).getCreateDate());
     }
 }

@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-openjdk-debian:11
+FROM amazoncorretto:17
 
 ADD analyzer-0.0.1-SNAPSHOT.jar /app/analyzer.jar
 

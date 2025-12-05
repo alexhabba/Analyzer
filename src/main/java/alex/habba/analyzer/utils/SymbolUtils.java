@@ -61,7 +61,7 @@ public class SymbolUtils {
                 .filter(i -> i.getSymbol().endsWith("USDT"))
 //                .filter(i -> i.getLaunchTime().isAfter(LocalDateTime.now().minusMonths(3)))
                 .sorted(Comparator.comparing(BybitInstrumentsResponse.InstrumentInfo::getLaunchTime))
-                .peek(i -> System.out.println("symbol: " + i.getSymbol() + "    time: " + i.getLaunchTime() + "     " + "https://www.bybit.com/trade/usdt/" + i.getSymbol()))
+//                .peek(i -> System.out.println("symbol: " + i.getSymbol() + "    time: " + i.getLaunchTime() + "     " + "https://www.bybit.com/trade/usdt/" + i.getSymbol()))
                 .map(BybitInstrumentsResponse.InstrumentInfo::getSymbol)
                 .collect(Collectors.toList());
     }
